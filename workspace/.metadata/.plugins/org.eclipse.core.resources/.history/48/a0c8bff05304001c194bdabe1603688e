@@ -1,0 +1,5 @@
+package com.bsimm.algafood.domain.model;
+
+public class Restaurante {
+
+}
