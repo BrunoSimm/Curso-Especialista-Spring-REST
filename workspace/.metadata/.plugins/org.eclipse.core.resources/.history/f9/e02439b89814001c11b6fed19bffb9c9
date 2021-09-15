@@ -1,0 +1,5 @@
+package com.bsimm.algafood.domain.service;
+
+public class CadastrarEstadoService {
+
+}

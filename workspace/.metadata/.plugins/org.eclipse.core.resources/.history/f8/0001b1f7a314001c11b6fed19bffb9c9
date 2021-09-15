@@ -1,0 +1,18 @@
+package com.bsimm.algafood.domain.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.bsimm.algafood.domain.model.Cidade;
+import com.bsimm.algafood.domain.repository.CidadeRepository;
+
+@Service
+public class CadastraCidadeService {
+	
+	@Autowired
+	private CidadeRepository cidadeRepository;
+
+	public Cidade salvar(Cidade cidade) {
+		return this.cidadeRepository.salvar(cidade);
+	}
+
+}

@@ -1,0 +1,52 @@
+package com.bsimm.algafood.api.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.bsimm.algafood.domain.model.Restaurante;
+import com.bsimm.algafood.domain.repository.RestauranteRepository;
+import com.bsimm.algafood.domain.service.CadastroRestauranteService;
+
+@RestController
+@RequestMapping("/restaurates")
+public class RestauranteController {
+	
+	private RestauranteRepository restauranteRepository;
+	
+	private CadastroRestauranteService cadastroRestauranteService;
+	
+	
+	@Autowired
+	public RestauranteController(RestauranteRepository restauranteRepository,
+			CadastroRestauranteService cadastroRestauranteService) {
+		this.restauranteRepository = restauranteRepository;
+		this.cadastroRestauranteService = cadastroRestauranteService;
+	}
+
+	@GetMapping
+	public List<Restaurante> listar(){
+		return this.restauranteRepository.listar();
+	}
+	
+	@GetMapping("/{restauranteId}")
+	public ResponseEntity<Restaurante> listarById(@PathVariable Long restauranteId) {
+		Restaurante restaurante = this.restauranteRepository.buscar(restauranteId);
+		
+		if (restaurante != null) {
+			return ResponseEntity.ok(restaurante);
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+
+	
+	
+
+}

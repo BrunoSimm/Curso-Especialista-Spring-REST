@@ -1,0 +1,27 @@
+package com.bsimm.algafood.domain.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.bsimm.algafood.domain.model.Restaurante;
+import com.bsimm.algafood.domain.repository.RestauranteRepository;
+
+@Service
+public class CadastroRestauranteService {
+	
+	@Autowired
+	private RestauranteRepository restauranteRepository;
+	
+	public Restaurante salvar(Restaurante restaurante) {
+		Long cozinhaId = restaurante.getCozinha().getId();
+		
+		
+		
+		
+		return this.restauranteRepository.salvar(restaurante);
+	}
+	
+	
+	
+
+}

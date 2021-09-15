@@ -1,0 +1,34 @@
+package com.bsimm.algafood.domain.service;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.bsimm.algafood.domain.exception.EntidadeNaoEncontradaException;
+import com.bsimm.algafood.domain.model.Cidade;
+import com.bsimm.algafood.domain.repository.CidadeRepository;
+
+@Service
+public class CadastraCidadeService {
+	
+	@Autowired
+	private CidadeRepository cidadeRepository;
+
+	public Cidade salvar(Cidade cidade) {
+		return this.cidadeRepository.salvar(cidade);
+	}
+
+	public Cidade atualizar(Cidade cidade, Long cidadeId) {
+		
+		Cidade cidadeAtual = this.cidadeRepository.buscar(cidadeId);
+		
+		if (cidadeAtual == null) {
+			throw new EntidadeNaoEncontradaException(String.format("Cidade com o código %d não existe.", cidadeId));
+		}
+		
+		BeanUtils.copyProperties(cidade, cidadeAtual,"id");
+		
+		return this.cidadeRepository.salvar(cidadeAtual);
+	}
+
+}

@@ -1,0 +1,5 @@
+package com.bsimm.algafood.api.controller;
+
+public class CidadesController {
+
+}

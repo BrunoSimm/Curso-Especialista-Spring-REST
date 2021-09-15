@@ -1,0 +1,32 @@
+package com.bsimm.algafood.domain.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
+
+import com.bsimm.algafood.domain.exception.EntidadeNaoEncontradaException;
+import com.bsimm.algafood.domain.model.Estado;
+import com.bsimm.algafood.domain.repository.EstadoRepository;
+
+@Service
+public class CadastrarEstadoService {
+	
+	@Autowired
+	private EstadoRepository estadoRepository;
+	
+	public Estado salvar(Estado estado) {
+		return this.estadoRepository.salvar(estado);
+	}
+	
+	public void remover(Long estadoId) {
+		
+		try {
+			this.estadoRepository.remover(estadoId);
+		} catch (EmptyResultDataAccessException e) {
+			return throw new EntidadeNaoEncontradaException(String.format("Não existe um estado com o código %d", estadoId));
+		}
+		
+	}
+	
+
+}
